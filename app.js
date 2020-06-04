@@ -32,6 +32,8 @@ const store = {
   score: 0
 };
 
+//test
+
 /**
  *
  * Technical requirements:
