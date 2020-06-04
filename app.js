@@ -210,7 +210,7 @@ function questionsPageTemplate(questionObj) {
       class="flex-item"></img>
     <h3 class="flex-item">${questionObj.question}</h3>
   </div>
-  <form method="POST" id="answerForm">
+  <form method="POST" id="answer-form" action="#">
     <div class="flex-container list">
       <ul class="flex-item">
         <li>
@@ -250,11 +250,12 @@ function firstQuestionPage() { }
 function handleStartButtonClick() {
   $('#start-page').on('click', '#button', function () {
     renderPage(questionsPageTemplate(store.questions[0]));
+    handleQuestionSubmitButtonClick();
   });
 }
 
 function handleQuestionSubmitButtonClick() {
-  $('#answerForm').submit(function (event) {
+  $('#answer-form').on('submit', function (event) {
     event.preventDefault();
     $('main').html('<p>hello</p>');
     alert($("input[name='answer']:checked").val());
