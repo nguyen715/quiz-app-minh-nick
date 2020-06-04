@@ -7,7 +7,7 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      id: cuid(),
+      id: 1,
       question: 'Aside from Stan Lee, which actor has appeared in the most MCU films?',
       answers: [
         'Chris Evans',
@@ -22,7 +22,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 2,
       question: 'What movie did Thanos first appear in?',
       answers: [
         'Avengers: Infinity War',
@@ -37,7 +37,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 3,
       question: 'How many Infinity Stones are there in the MCU?',
       answers: [
         'Five',
@@ -52,7 +52,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 4,
       question: 'What is the name of Jane\'s sidekick played by Kat Dennings in Thor?',
       answers: [
         'Darcy Lewis',
@@ -67,7 +67,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 5,
       question: 'Who trained Matt Murdock on Daredevil?',
       answers: [
         'Rock',
@@ -82,7 +82,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 6,
       question: 'What is the name of Iron Man’s assistant?',
       answers: [
         'Emma Frost',
@@ -97,7 +97,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 7,
       question: 'What’s the name of Peter Parker’s ex girlfriend before he dated Mary Jane?',
       answers: [
         'Kisha Peterson',
@@ -112,7 +112,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 8,
       question: 'What metal alloy has Wolverine\'s skeleton been reinforced with?',
       answers: [
         'Titanium',
@@ -127,7 +127,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 9,
       question: 'Who is Quicksilver\'s father?',
       answers: [
         'Magneto',
@@ -142,7 +142,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 10,
       question: 'What superhero was Storm married to?',
       answers: [
         'Wolverine',
@@ -157,7 +157,7 @@ const store = {
     },
 
     {
-      id: cuid(),
+      id: 11,
       question: 'Hey look, it\'s Gambit! What\'s his real name?',
       answers: [
         'Louis Soulier',
@@ -172,8 +172,9 @@ const store = {
     },
   ],
   quizStarted: false,
-  questionNumber: 0,
+  questionNumber: 1,
   questionAnswered: false,
+  answeredCorrectly: false,
   score: 0
 };
 
@@ -185,27 +186,87 @@ function startPageTemplate() {
       </div>
     
       <div class="flex-item">
-        <button>Start Quiz</button>
+        <button id="button">Start Quiz</button>
       </div>
     </div>  
-  `
+  `;
 }
 
-function questionsPage() {
+function questionsPageTemplate(questionObj) {
+  return `
+  <div id="question-page">
+  <div class="flex-container top">
+    <div class="flex-item">
+      <span>Q. ${questionObj.id} of ${store.questions.length}</span>
+    </div>
+    <div class="flex-item">
+      <span>Score ${store.score}/${questionObj.id}</span>
+    </div>
+  </div>
 
+  <div class="flex-container middle">
+    <img
+      src="${questionObj.image}"
+      class="flex-item"></img>
+    <h3 class="flex-item">${questionObj.question}</h3>
+  </div>
+  <form method="POST" id="answerForm">
+    <div class="flex-container list">
+      <ul class="flex-item">
+        <li>
+          <input type="radio" name="answer" value="${questionObj.answers[0]} required">
+          <label for="answer1">${questionObj.answers[0]}</label>
+        </li>
+        <li>
+          <input type="radio" name="answer" value="${questionObj.answers[1]}">
+          <label for="answer1">${questionObj.answers[1]}</label>
+        </li>
+        <li>
+          <input type="radio" name="answer" value="${questionObj.answers[2]}">
+          <label for="answer1">${questionObj.answers[2]}</label>
+        </li>
+        <li>
+          <input type="radio" name="answer" value="${questionObj.answers[3]}">
+          <label for="answer1">${questionObj.answers[3]}</label>
+        </li>
+      </ul>
+    </div>
+    <div class="flex-container bottom">
+      <button class="flex-item" type="submit">Submit</button>
+    </div>
+  </form>
+</div>
+  `;
 }
 
-function feedBackPage(){};
+function feedBackPage() { }
 
-function renderPage(pageTemplate){
-  $('main').html(pageTemplate());
+function renderPage(pageTemplate) {
+  $('main').html(pageTemplate);
 }
 
-function firstQuestionPage(){};
+function firstQuestionPage() { }
 
-function handleStartButtonClick(){
-  // renderFirstQuestionPage();
-};
+function handleStartButtonClick() {
+  $('#start-page').on('click', '#button', function () {
+    renderPage(questionsPageTemplate(store.questions[0]));
+  });
+}
+
+function handleQuestionSubmitButtonClick() {
+  $('#answerForm').submit(function (event) {
+    event.preventDefault();
+    $('main').html('<p>hello</p>');
+    alert($("input[name='answer']:checked").val());
+    //checkPlayerAnswer(store.questions[store.questionNumber - 1], $('input').val());
+
+    //renderPage(questionsPageTemplate(store.questions[0]));
+  });
+}
+
+function checkPlayerAnswer(question, playerAnswer) {
+
+}
 
 function master() {
   renderPage(startPageTemplate);
@@ -217,12 +278,6 @@ function master() {
 $(master);
 
 
-
-
-
-
-
-//test
 
 /**
  *

@@ -6,8 +6,9 @@
   * https://github.com/andreacardybailey/responsive_example/blob/master/styles/responsive-base.css 
   *
 */
+
 #start-page, #question-page, #feedback-page, #results-page{
-  border: solid 1px;
+  /* border: solid 1px; */
   padding: 50px;
 }
 
