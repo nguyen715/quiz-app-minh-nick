@@ -214,20 +214,20 @@ function questionsPageTemplate(questionObj) {
     <div class="flex-container list">
       <ul class="flex-item">
         <li>
-          <input type="radio" name="answer" value="${questionObj.answers[0]} required">
+          <input type="radio" name="answer" id="answer1" value="${questionObj.answers[0]}" required>
           <label for="answer1">${questionObj.answers[0]}</label>
         </li>
         <li>
-          <input type="radio" name="answer" value="${questionObj.answers[1]}">
-          <label for="answer1">${questionObj.answers[1]}</label>
+          <input type="radio" name="answer" id="answer2" value="${questionObj.answers[1]}">
+          <label for="answer2">${questionObj.answers[1]}</label>
         </li>
         <li>
-          <input type="radio" name="answer" value="${questionObj.answers[2]}">
-          <label for="answer1">${questionObj.answers[2]}</label>
+          <input type="radio" name="answer" id="answer3" value="${questionObj.answers[2]}">
+          <label for="answer3">${questionObj.answers[2]}</label>
         </li>
         <li>
-          <input type="radio" name="answer" value="${questionObj.answers[3]}">
-          <label for="answer1">${questionObj.answers[3]}</label>
+          <input type="radio" name="answer" id="answer4" value="${questionObj.answers[3]}">
+          <label for="answer4">${questionObj.answers[3]}</label>
         </li>
       </ul>
     </div>
@@ -245,8 +245,6 @@ function renderPage(pageTemplate) {
   $('main').html(pageTemplate);
 }
 
-function firstQuestionPage() { }
-
 function handleStartButtonClick() {
   $('#start-page').on('click', '#button', function () {
     renderPage(questionsPageTemplate(store.questions[0]));
@@ -257,16 +255,30 @@ function handleStartButtonClick() {
 function handleQuestionSubmitButtonClick() {
   $('#answer-form').on('submit', function (event) {
     event.preventDefault();
-    $('main').html('<p>hello</p>');
-    alert($("input[name='answer']:checked").val());
-    //checkPlayerAnswer(store.questions[store.questionNumber - 1], $('input').val());
+    let playerAnswer = $(this).closest("#answer-form").find("input[name='answer']:checked").val();
+    $('main').html('<p>goodbye</p>');
+    console.log(playerAnswer);
+    checkPlayerAnswer(store.questions[store.questionNumber - 1], playerAnswer);
 
     //renderPage(questionsPageTemplate(store.questions[0]));
   });
 }
 
+/**
+ * Function to check player's answer
+ * @param {object} question
+ * @param {string} playerAnswer
+ * @returns {bool} correctOrIncorrect
+ */
 function checkPlayerAnswer(question, playerAnswer) {
-
+  if( question.correctAnswer === playerAnswer) {
+    console.log("Answer is correct");
+    return true;
+  }
+  else {
+    console.log("Answer is incorrect");
+    return false;
+  }
 }
 
 function master() {
@@ -278,7 +290,11 @@ function master() {
 
 $(master);
 
-
+/**
+* To Do List
+* Clean up  let playerAnswer = $(this).closest("#answer-form").find("input[name='answer']:checked").val();
+*
+**/
 
 /**
  *
