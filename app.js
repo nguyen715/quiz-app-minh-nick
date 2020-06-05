@@ -15,7 +15,7 @@ const store = {
         'Robert Downey, Jr.',
         'Samuel L. Jackson'
       ],
-      correctAnswer: 'Robert Downey, Jr.',
+      correctAnswer: 'Robert Downey, Jr',
       correctAnswerIndex: 2,
       image: "/images/rob-downey.jpg",
       info: "As of Avengers: Infinity War, Robert Downey Jr. has appeared in 9 MCU movies. After Avengers: Endgame, he'll have played Tony Stark 10 times. Samuel L. Jackson is close behind with 6 appearances."
@@ -86,11 +86,11 @@ const store = {
       question: 'What is the name of Iron Man’s assistant?',
       answers: [
         'Emma Frost',
-        'Pepper Pots',
+        'Pepper Potts',
         'Carol Danvers ',
         'Jennifer Walters'
       ],
-      correctAnswer: 'Pepper Pots',
+      correctAnswer: 'Pepper Potts',
       correctAnswerIndex: 1,
       image: "/images/pepper-potts.jpg",
       info: "Virginia \"Pepper\" Potts is the CEO of Stark Industries. Originally working as Tony Stark's personal assistant, she would take care of his schedule etc."
@@ -172,7 +172,7 @@ const store = {
     },
   ],
   quizStarted: false,
-  questionNumber: 1,
+  questionNumber: 0,
   questionAnswered: false,
   answeredCorrectly: false,
   score: 0
@@ -194,52 +194,90 @@ function startPageTemplate() {
 
 function questionsPageTemplate(questionObj) {
   return `
-  <div id="question-page">
-  <div class="flex-container top">
-    <div class="flex-item">
-      <span>Q. ${questionObj.id} of ${store.questions.length}</span>
-    </div>
-    <div class="flex-item">
-      <span>Score ${store.score}/${questionObj.id}</span>
-    </div>
-  </div>
+    <div id="question-page">
+      <div class="flex-container top">
+        <div class="flex-item">
+          <span>Q. ${questionObj.id} of ${store.questions.length}</span>
+        </div>
+        <div class="flex-item">
+          <span>Score ${store.score}/${questionObj.id - 1}</span>
+        </div>
+      </div>
 
-  <div class="flex-container middle">
-    <img
-      src="${questionObj.image}"
-      class="flex-item"></img>
-    <h3 class="flex-item">${questionObj.question}</h3>
-  </div>
-  <form method="POST" id="answer-form" action="#">
-    <div class="flex-container list">
-      <ul class="flex-item">
-        <li>
-          <input type="radio" name="answer" id="answer1" value="${questionObj.answers[0]}" required>
-          <label for="answer1">${questionObj.answers[0]}</label>
-        </li>
-        <li>
-          <input type="radio" name="answer" id="answer2" value="${questionObj.answers[1]}">
-          <label for="answer2">${questionObj.answers[1]}</label>
-        </li>
-        <li>
-          <input type="radio" name="answer" id="answer3" value="${questionObj.answers[2]}">
-          <label for="answer3">${questionObj.answers[2]}</label>
-        </li>
-        <li>
-          <input type="radio" name="answer" id="answer4" value="${questionObj.answers[3]}">
-          <label for="answer4">${questionObj.answers[3]}</label>
-        </li>
-      </ul>
+      <div class="flex-container middle">
+        <img
+          src="${questionObj.image}"
+          class="flex-item"></img>
+        <h3 class="flex-item">${questionObj.question}</h3>
+      </div>
+
+      <form method="POST" id="answer-form" action="#">
+        <div class="flex-container list">
+          <ul class="flex-item">
+            <li>
+              <input type="radio" name="answer" id="answer1" value="${questionObj.answers[0]}" required>
+              <label for="answer1">${questionObj.answers[0]}</label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="answer2" value="${questionObj.answers[1]}">
+              <label for="answer2">${questionObj.answers[1]}</label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="answer3" value="${questionObj.answers[2]}">
+              <label for="answer3">${questionObj.answers[2]}</label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="answer4" value="${questionObj.answers[3]}">
+              <label for="answer4">${questionObj.answers[3]}</label>
+            </li>
+          </ul>
+        </div>
+
+        <div class="flex-container bottom">
+          <button class="flex-item" type="submit">Submit</button>
+        </div>
+      </form>
     </div>
-    <div class="flex-container bottom">
-      <button class="flex-item" type="submit">Submit</button>
-    </div>
-  </form>
-</div>
   `;
 }
 
-function feedBackPage() { }
+function feedbackPageTemplate(isCorrect, questionNum) {
+  let buttonLabel = (questionNum + 1 === store.questions.length) ? 'Check Results' : 'Next Question';
+
+  let questionObj = store.questions[questionNum];
+  let feedbackString = (isCorrect) ? 'Correct!' : 'Incorrect!';
+
+  if (isCorrect)
+    store.score += 1;
+
+  return `
+    <div id="feedback-page">
+      <div class="flex-container top">
+        <span class="flex-item">Q.${questionObj.id} of ${store.questions.length}</span>
+        <span class="flex-item">Score: ${store.score}/${questionObj.id}</span>
+      </div>
+
+      <div class="flex-container middle">
+        <img
+          src="${questionObj.image}"
+          class="flex-item"></img>
+        <div class="flex-item">
+          <h3>${feedbackString}</h3>
+          <p>The correct answer is ${questionObj.correctAnswer}.</p>
+          <p>${questionObj.info}</p>
+        </div>
+      </div>
+
+      <div class="flex-container bottom">
+        <button>${buttonLabel}</button>
+      </div>
+    </div>
+  `;
+}
+
+function resultsPageTemplate() {
+
+}
 
 function renderPage(pageTemplate) {
   $('main').html(pageTemplate);
@@ -258,20 +296,43 @@ function handleQuestionSubmitButtonClick() {
     let playerAnswer = $(this).closest("#answer-form").find("input[name='answer']:checked").val();
     $('main').html('<p>goodbye</p>');
     console.log(playerAnswer);
-    checkPlayerAnswer(store.questions[store.questionNumber - 1], playerAnswer);
 
-    //renderPage(questionsPageTemplate(store.questions[0]));
+    let isCorrect = checkPlayerAnswer(store.questions[store.questionNumber], playerAnswer);
+
+    renderPage(feedbackPageTemplate(isCorrect, store.questionNumber));
+    handleFeedbackPageButtonClick();
   });
+}
+
+
+
+function handleFeedbackPageButtonClick() {
+  $('button').click(function (event) {
+    if (store.questionNumber + 1 === store.questions.length) {
+      alert('quiz over!');
+      renderPage(resultsPageTemplate());
+      handleResultsPageButtonClick();
+    }
+    else {
+      store.questionNumber += 1;
+      renderPage(questionsPageTemplate(store.questions[store.questionNumber]));
+      handleQuestionSubmitButtonClick();
+    }
+  });
+}
+
+function handleResultsPageButtonClick() {
+
 }
 
 /**
  * Function to check player's answer
- * @param {object} question
- * @param {string} playerAnswer
- * @returns {bool} correctOrIncorrect
+ * @param {object} object
+ * @param {string} string
+ * @returns {bool} bool
  */
 function checkPlayerAnswer(question, playerAnswer) {
-  if( question.correctAnswer === playerAnswer) {
+  if (question.correctAnswer === playerAnswer) {
     console.log("Answer is correct");
     return true;
   }
@@ -293,7 +354,7 @@ $(master);
 /**
 * To Do List
 * Clean up  let playerAnswer = $(this).closest("#answer-form").find("input[name='answer']:checked").val();
-*
+* Minimize calls to the store variable
 **/
 
 /**
