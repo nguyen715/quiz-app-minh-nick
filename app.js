@@ -17,7 +17,7 @@ const store = {
       ],
       correctAnswer: 'Robert Downey, Jr',
       correctAnswerIndex: 2,
-      image: "/quiz-app-minh-nick/images/rob-downey.jpg",
+      image: "/images/rob-downey.jpg",
       info: "As of Avengers: Infinity War, Robert Downey Jr. has appeared in 9 MCU movies. After Avengers: Endgame, he'll have played Tony Stark 10 times. Samuel L. Jackson is close behind with 6 appearances."
     },
 
