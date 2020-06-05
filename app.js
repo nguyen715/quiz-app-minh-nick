@@ -171,7 +171,6 @@ const store = {
       info: "Admit it, mon ami, we actu'ly make a pretty good team... when we ain't tryin' t'kill each other.    -Gambit"
     },
   ],
-  quizStarted: false,
   questionNumber: 0,
   questionAnswered: false,
   answeredCorrectly: false,
@@ -276,14 +275,39 @@ function feedbackPageTemplate(isCorrect, questionNum) {
 }
 
 function resultsPageTemplate() {
+  return `
+    <div id="results-page" class="flex-container">
+      <div class="flex-item">
+        <h2>Results</h2>
+      </div>
+      <div class="flex-item">
+        <h3>You answered ${store.score} out of ${store.questions.length} questions correctly!</h3>
+        <p>To take the quiz again, click the button below.</p>
+      </div>
 
+
+      <div class="flex-item">
+        <button>Take Quiz Again</button>
+      </div>
+    </div>
+  `
 }
+
+
 
 function renderPage(pageTemplate) {
   $('main').html(pageTemplate);
 }
 
+function resetStateVariables() {
+  store.questionNumber = 0;
+  store.questionAnswered = false;
+  store.answeredCorrectly = false;
+  store.score = 0;
+}
+
 function handleStartButtonClick() {
+  resetStateVariables();
   $('#start-page').on('click', '#button', function () {
     renderPage(questionsPageTemplate(store.questions[0]));
     handleQuestionSubmitButtonClick();
@@ -322,7 +346,10 @@ function handleFeedbackPageButtonClick() {
 }
 
 function handleResultsPageButtonClick() {
-
+  $('button').click(function() {
+    renderPage(startPageTemplate);
+    handleStartButtonClick();
+  })
 }
 
 /**
@@ -355,6 +382,7 @@ $(master);
 * To Do List
 * Clean up  let playerAnswer = $(this).closest("#answer-form").find("input[name='answer']:checked").val();
 * Minimize calls to the store variable
+* Results page conditional based on score result
 **/
 
 /**

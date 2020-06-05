@@ -19,6 +19,10 @@
   flex-direction: column;
 }
 
+.flex-item{
+  flex: 1;
+}
+
 .top{
   justify-content: space-between;
   flex-direction: row;
@@ -72,4 +76,10 @@ ul{
 
 #results-page h3{
   text-align: center;
+}
+
+@media all and (min-width: 700px) {
+  .middle {
+    flex-direction: row;
+  }
 }
