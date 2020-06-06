@@ -78,8 +78,8 @@ ul{
   text-align: center;
 }
 
-@media all and (min-width: 700px) {
+/* @media all and (min-width: 700px) {
   .middle {
     flex-direction: row;
   }
-}
+} */
