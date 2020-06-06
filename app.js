@@ -314,6 +314,23 @@ function handleStartButtonClick() {
   });
 }
 
+/**
+ * Function to check player's answer
+ * @param {object} object
+ * @param {string} string
+ * @returns {bool} bool
+ */
+function checkPlayerAnswer(question, playerAnswer) {
+  if (question.correctAnswer === playerAnswer) {
+    console.log("Answer is correct");
+    return true;
+  }
+  else {
+    console.log("Answer is incorrect");
+    return false;
+  }
+}
+
 function handleQuestionSubmitButtonClick() {
   $('#answer-form').on('submit', function (event) {
     event.preventDefault();
@@ -353,23 +370,6 @@ function handleResultsPageButtonClick() {
     renderPage(startPageTemplate);
     handleStartButtonClick();
   })
-}
-
-/**
- * Function to check player's answer
- * @param {object} object
- * @param {string} string
- * @returns {bool} bool
- */
-function checkPlayerAnswer(question, playerAnswer) {
-  if (question.correctAnswer === playerAnswer) {
-    console.log("Answer is correct");
-    return true;
-  }
-  else {
-    console.log("Answer is incorrect");
-    return false;
-  }
 }
 
 function master() {
