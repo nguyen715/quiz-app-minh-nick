@@ -335,13 +335,13 @@ function handleQuestionSubmitButtonClick() {
   $('#answer-form').on('submit', function (event) {
     event.preventDefault();
     let playerAnswer = $(this).closest("#answer-form").find("input[name='answer']:checked").val();
+
+
+    let isCorrect = checkPlayerAnswer(store.questions[store.questionNumber], playerAnswer);
     //$('main').html('<p>goodbye</p>');
     console.log('playerAnswer = ' + playerAnswer);
     console.log('questionNumber = ' + store.questions[store.questionNumber]);
     console.log('isCorrect = ' + isCorrect);
-
-
-    let isCorrect = checkPlayerAnswer(store.questions[store.questionNumber], playerAnswer);
 
     renderPage(feedbackPageTemplate(isCorrect, store.questionNumber));
     handleFeedbackPageButtonClick();
