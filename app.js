@@ -108,7 +108,7 @@ const store = {
       correctAnswer: 'Gwen Stacy',
       correctAnswerIndex: 3,
       image: "./images/spider-man.jpg",
-      info: "Peter Parker met Gwen while both were studying as undergraduates at Empire State University, their relationship began almost immediately after Peter stopped going out with Mary Jane Watson."
+      info: "Peter Parker met Gwen while both were studying as undergraduates at Empire State University."
     },
 
     {
@@ -192,11 +192,11 @@ function startPageTemplate() {
 }
 
 
-      // old code
-      // <li>
-      //   <input type="radio" name="answer" id="answer1" value="${questionObj.answers[0]}" required>
-      //   <label for="answer1">${questionObj.answers[0]}</label>
-      // </li>
+// old code
+// <li>
+//   <input type="radio" name="answer" id="answer1" value="${questionObj.answers[0]}" required>
+//   <label for="answer1">${questionObj.answers[0]}</label>
+// </li>
 
 function questionsPageTemplate(questionObj) {
   return `
@@ -364,7 +364,7 @@ function handleFeedbackPageButtonClick() {
 }
 
 function handleResultsPageButtonClick() {
-  $('button').click(function() {
+  $('button').click(function () {
     renderPage(startPageTemplate);
     handleStartButtonClick();
   })

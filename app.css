@@ -7,9 +7,17 @@
   *
 */
 
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap');
+
+* {
+  font-family: 'Cutive Mono', monospace;
+}
+
 #start-page, #question-page, #feedback-page, #results-page{
   /* border: solid 1px; */
   padding: 50px;
+  max-width: 1000px;
+  margin: auto;
 }
 
 .flex-container{
@@ -20,7 +28,7 @@
 }
 
 .flex-item{
-  flex: 1;
+  /* flex: 1; */
 }
 
 .top{
@@ -40,7 +48,7 @@ h2{
 }
 
 h3{
-  font-size: 40px;
+  font-size: 30px;
 }
 
 img{
@@ -52,7 +60,7 @@ p{
 }
 
 span{
-  font-size: 20px;
+  font-size: 30px;
 }
 
 button{
@@ -60,6 +68,11 @@ button{
   padding: 15px 32px;
   border: 0px;
   background-color: #8ABAAE;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: rgb(128, 235, 208);
 }
 
 ul{
@@ -78,8 +91,20 @@ ul{
   text-align: center;
 }
 
-/* @media all and (min-width: 700px) {
-  .middle {
-    flex-direction: row;
+@media all and (min-width: 700px) {
+  span{
+    font-size: 40px;
   }
-} */
+
+  h3{
+    font-size: 45px;
+  }
+
+  ul{
+    font-size: 35px;
+  }
+
+  p{
+    font-size: 30px;
+  }
+}
