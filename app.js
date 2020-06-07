@@ -18,6 +18,7 @@ const store = {
       correctAnswer: 'Robert Downey, Jr',
       correctAnswerIndex: 2,
       image: "./images/rob-downey.jpg",
+      alt: "Samuel L. Jackson and Iron Man",
       info: "As of Avengers: Infinity War, Robert Downey Jr. has appeared in 9 MCU movies. After Avengers: Endgame, he'll have played Tony Stark 10 times. Samuel L. Jackson is close behind with 6 appearances."
     },
 
@@ -33,6 +34,7 @@ const store = {
       correctAnswer: 'Marvel\'s The Avengers',
       correctAnswerIndex: 3,
       image: "./images/thanos.jpg",
+      alt: "Thanos",
       info: "He appears in a mid-credits scene."
     },
 
@@ -48,6 +50,7 @@ const store = {
       correctAnswer: 'Six',
       correctAnswerIndex: 1,
       image: "./images/infinity-stone.jpg",
+      alt: "Infinity stones",
       info: "There are six Infinity Stones: Space (Blue), Mind (Yellow), Power (Purple), Time (Green), Reality (Red) and Soul (Orange)."
     },
 
@@ -63,6 +66,7 @@ const store = {
       correctAnswer: 'Darcy Lewis',
       correctAnswerIndex: 0,
       image: "./images/darcy-lewis.jpg",
+      alt: "Darcy Lewis",
       info: "Darcy Lewis is a close friend and co-worker of Jane Foster."
     },
 
@@ -78,6 +82,7 @@ const store = {
       correctAnswer: 'Stick',
       correctAnswerIndex: 3,
       image: "./images/daredevil.jpg",
+      alt: "Daredevil",
       info: "Stick first appears in his self-titled episode of Season One of Daredevil. He approaches Matt Murdock shortly after his father is killed, leaving him orphaned at the age of ten, and begins to train him."
     },
 
@@ -93,6 +98,7 @@ const store = {
       correctAnswer: 'Pepper Potts',
       correctAnswerIndex: 1,
       image: "./images/pepper-potts.jpg",
+      alt: "Pepper Potts",
       info: "Virginia \"Pepper\" Potts is the CEO of Stark Industries. Originally working as Tony Stark's personal assistant, she would take care of his schedule etc."
     },
 
@@ -108,6 +114,7 @@ const store = {
       correctAnswer: 'Gwen Stacy',
       correctAnswerIndex: 3,
       image: "./images/spider-man.jpg",
+      alt: "Gwen Stacy",
       info: "Peter Parker met Gwen while both were studying as undergraduates at Empire State University."
     },
 
@@ -123,6 +130,7 @@ const store = {
       correctAnswer: 'Adamantium',
       correctAnswerIndex: 2,
       image: "./images/wolverine.jpg",
+      alt: "Wolverine",
       info: "Marvel Comics' adamantium has an extremely stable molecular structure that prevents it from being further molded even if the temperature is high enough to keep it in its liquefied form."
     },
 
@@ -138,6 +146,7 @@ const store = {
       correctAnswer: 'Magneto',
       correctAnswerIndex: 0,
       image: "./images/quicksilver.jpg",
+      alt: "Quicksilver",
       info: "Magneto was the father of the Scarlet Witch and Quicksilver, with entire storylines and comic book series built around the relationship."
     },
 
@@ -153,6 +162,7 @@ const store = {
       correctAnswer: 'Black Panther',
       correctAnswerIndex: 3,
       image: "./images/storm.jpg",
+      alt: "Storm",
       info: "One of the highest profile romantic relationships in Marvel  history, with the ruler of Wakanda and one of the most powerful mutants in the world eventually getting married only for the marriage to be annulled five years later."
     },
 
@@ -168,6 +178,7 @@ const store = {
       correctAnswer: 'Remy Etienne LeBeau',
       correctAnswerIndex: 1,
       image: "./images/gambit.jpg",
+      alt: "Gambit",
       info: "Admit it, mon ami, we actu'ly make a pretty good team... when we ain't tryin' t'kill each other.    -Gambit"
     },
   ],
@@ -213,6 +224,7 @@ function questionsPageTemplate(questionObj) {
       <div class="flex-container middle">
         <img
           src="${questionObj.image}"
+          alt ="${questionObj.alt}"
           class="flex-item"></img>
         <h3 class="flex-item">${questionObj.question}</h3>
       </div>
